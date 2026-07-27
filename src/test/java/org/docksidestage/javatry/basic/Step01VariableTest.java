@@ -76,6 +76,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land.add(new BigDecimal(1));
         sea.add(new BigDecimal(1));
         log(sea); // your answer? => 416
+        // TODO jflute 1on1にてimmutableふぉろー予定 (2026/07/27)
     }
 
     // ===================================================================================
@@ -111,6 +112,7 @@ public class Step01VariableTest extends PlainTestCase {
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
         log(sea); // your answer? => bigband|1|null|"magician"(helpInstanceVariableViaMethodでreturnしてない)
+        // TODO jflute 1on1にて、引数の変数のお話をフォロー予定 (2026/07/27)
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -131,6 +133,7 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor(sea.concat(landStr);を代入していない)
+        // TODO sugimoto 厳密には、help内で代入をしてたとしても結果は変わらないです by jflute (2026/07/27)
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -192,6 +195,7 @@ public class Step01VariableTest extends PlainTestCase {
      * </pre>
      */
     int piari;
+
     public void test_variable_writing() {
         // define variables here
         String sea = "mystic";
