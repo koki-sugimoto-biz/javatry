@@ -48,15 +48,31 @@ public class Step01VariableTest extends PlainTestCase {
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8null:mai
+        // TODO sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
+        // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_reassigned_basic() {
-        String sea = "mystic";
-        String land = "oneman";
-        sea = land;
-        land = land + "'s dreams";
+        String sea = "mystic"; // 1(1丁目1番地)
+        String land = "oneman"; // 2(2丁目2番地)
+        sea = land; // seaもlandも2丁目2番地を指してる
+        land = land + "'s dreams"; // "'s dreams"(3丁目3番地), "oneman's dreams"
         log(sea); // your answer? => oneman
+        // #1on1: インスタンスとは？ (2026/07/27)
+        // 聞いたことありはするけど...インスタンスのイメージ？なんなんだろう？ by すぎもとさん
+        // 一軒家の例。
+        // インスタンスのフォーカス。
+        // 質問: 変数とは違うのか？
+        // 変数とインスタンスの関係性。
+        // 変数とインスタンスって大抵は1:1だけど、厳密にはmany-to-oneにもなる。
+        //
+        // onemanとかは破棄されるのか？
+        // → 破棄対象(候補)になる、いつかガベージコレクションで破棄される
+        //
+        // #1on1: BigDecimalインスタンスエクササイズGood (2026/07/27)
+        // 仮説を言い切るところ、素晴らしい。ビジネスコミュニケーションでは大事なこと。
+        // add()でreturn new BigDecimal()してるところたくさん。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -66,17 +82,35 @@ public class Step01VariableTest extends PlainTestCase {
         sea = land;
         land++;
         log(sea); // your answer? => 415
+        // #1on1: プリミティヴ型は変数に値がそのまま入っているイメージ (2026/07/27)
+        // 言語によっては、intって書いてもオブジェクトの場合もある。
+        // 質問 → intのラッパー型(オブジェクト型)はInteger。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_variable_reassigned_BigDecimal() {
-        BigDecimal sea = new BigDecimal(94);
-        BigDecimal land = new BigDecimal(415);
+        BigDecimal sea = new BigDecimal(94); // 1
+        BigDecimal land = new BigDecimal(415); // 2
         sea = land;
-        sea = land.add(new BigDecimal(1));
-        sea.add(new BigDecimal(1));
+        sea = land.add(new BigDecimal(1)); // 3, 4
+        sea.add(new BigDecimal(1)); // 5, 6
         log(sea); // your answer? => 416
-        // TODO jflute 1on1にてimmutableふぉろー予定 (2026/07/27)
+        // done jflute 1on1にてimmutableふぉろー予定 (2026/07/27)
+        // #1on1: immutableとは？ (2026/07/27)
+        // 聞いたことがあるかないかくらい。
+        // Immutableは「不変な」
+        // o Immutableなインスタンス(クラス)
+        // o Immutableな変数
+        //
+        // immutableのメリデメ: (mutableに対して)
+        // (メリット)
+        // o 環境変数みたいな不変な担保されている方がいい(安全性) by すぎもとさん
+        // o 責務がわかりやすい印象 by すぎもとさん
+        // o 読み飛ばしとか、確定情報を得られやすくなって、可読性が良くなる by jflute
+        //   (責務の話と通じるかも)
+        // (デメリット)
+
+        // TODO jflute 次回1on1にて、immutableのデメリットから、歴史まで (2026/07/27)
     }
 
     // ===================================================================================
@@ -112,7 +146,7 @@ public class Step01VariableTest extends PlainTestCase {
         helpInstanceVariableViaMethod(instanceMagiclamp);
         String sea = instanceBroadway + "|" + instanceDockside + "|" + instanceHangar + "|" + instanceMagiclamp;
         log(sea); // your answer? => bigband|1|null|"magician"(helpInstanceVariableViaMethodでreturnしてない)
-        // TODO jflute 1on1にて、引数の変数のお話をフォロー予定 (2026/07/27)
+        // done jflute 1on1にて、引数の変数のお話をフォロー予定 (2026/07/27)
     }
 
     private void helpInstanceVariableViaMethod(String instanceMagiclamp) {
@@ -133,7 +167,11 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentImmutableMethodcall(sea, land);
         log(sea); // your answer? => harbor(sea.concat(landStr);を代入していない)
-        // TODO sugimoto 厳密には、help内で代入をしてたとしても結果は変わらないです by jflute (2026/07/27)
+        // done sugimoto 厳密には、help内で代入をしてたとしても結果は変わらないです by jflute (2026/07/27)
+        // #1on1: immutableインスタンスなので、helpメソッドを読まなくても答えが確定する (2026/07/27)
+        //        (かつ、sea変数はimmutableではないけど、再代入をどこでもやってないから)
+        // #1on1: 変数の型とは？ (2026/07/27)
+        // 変数という箱に入れるものはこれだよ、っていう制約。
     }
 
     private void helpMethodArgumentImmutableMethodcall(String sea, int land) {
@@ -142,6 +180,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea.concat(landStr);
     }
 
+    // TODO jflute 次回1on1にて、mutableなクラスの話 (2026/07/27)
     // -----------------------------------------------------
     //                                   Mutable Method-call
     //                                   -------------------
