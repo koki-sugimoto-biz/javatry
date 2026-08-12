@@ -48,12 +48,12 @@ public class Step01VariableTest extends PlainTestCase {
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8null:mai
-        // TODO sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
+        // TODO Done sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
         // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
         // TODO sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
         // basicの後に、colorbox, debug, DI, DBFluteも別であり、どれを深く知りたいかを事前に決めておくと進めやすいかもです
         // （自分はbasicのstep06, 07を深掘りさせていただきました）
-        // ツールの思想の話やフレームワーク選択という枠組みでの話
+        // ツールの思想の話やフレームワーク選択という枠組みでの話 by sugimoto
         // だけど、決してそれだけではなく、何にでも応用が効きそうだし、何でも発生しうる問題だと思った
         // 関連URLも読んでみた
         // フレームワーク選定という寂しい工程と一つの希望 https://jflute.hatenadiary.jp/entry/20170922/sadlyselectfw
@@ -69,6 +69,11 @@ public class Step01VariableTest extends PlainTestCase {
         // 基本的に自分ではチャーハンを作る練習をしているつもりだが、もっともらしい理由をつけてショートケーキを作っていることはある気がする
         // まだプロと自認できるレベルではないが、お金を頂いている以上プロなのは紛れもない事実
         // その上でまだプロだと自称できないのであれば、自称できるようになるまでチャーハンを作り続けるべき
+
+
+        // TODO Done sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
+        // basicの後に、colorbox, debug, DI, DBFluteも別であり、どれを深く知りたいかを事前に決めておくと進めやすいかもです
+        // （自分はbasicのstep06, 07を深掘りさせていただきました）
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -105,12 +110,19 @@ public class Step01VariableTest extends PlainTestCase {
         // 言語によっては、intって書いてもオブジェクトの場合もある。
         // 質問 → intのラッパー型(オブジェクト型)はInteger。
 
-        // TODO sugimoto [教えてください] Goはどういうパラダイムの言語です？ by akinari.tsuji (2026/08/12)
+        // TODO Done sugimoto [教えてください] Goはどういうパラダイムの言語です？ by akinari.tsuji (2026/08/12)
         // Goではクラスや継承がないと聞きましたがオブジェクト指向なのかなーと気になりました。
         // Step06の内容かもなので、無視してDoneでも大丈夫です！
         // （お節介かもですが）せっかく普段と違うJavaという言語なので、業務で使う言語と比較しながら進めると面白いかもです！
         // ちなみにRubyだと全てがオブジェクトになります。なので "1.to_s"とかかけちゃいます。
         // 実行環境やクラス定義自身もオブジェクトになります（初めて知った時びっくりしました笑）。
+        // なんかマルチパラダイムってやつらしいです by sugimoto
+        // 基本はシンプルな手続き型で、オブジェクト指向っぽくまとめることができ、並行処理が書けて、関数型としても扱えるしって感じらしいです！
+        // チームのハカセ(nakajimaさん)にお聞きしたところ、さまざまな言語のいいとこ取りをしているらしいです
+        // better C とも表現されるらしく、あえてシンプルな仕様にすることで誰が書いても同じようなコードになるみたいな特徴があったり
+
+        // 実行環境やクラス定義自身もオブジェクトになります
+        // -> ?!そうなんですか?! いまいち分かんないので調べてみます....!!!
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
