@@ -50,10 +50,25 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => mystic8null:mai
         // TODO sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
         // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
-
         // TODO sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
         // basicの後に、colorbox, debug, DI, DBFluteも別であり、どれを深く知りたいかを事前に決めておくと進めやすいかもです
         // （自分はbasicのstep06, 07を深掘りさせていただきました）
+        // ツールの思想の話やフレームワーク選択という枠組みでの話
+        // だけど、決してそれだけではなく、何にでも応用が効きそうだし、何でも発生しうる問題だと思った
+        // 関連URLも読んでみた
+        // フレームワーク選定という寂しい工程と一つの希望 https://jflute.hatenadiary.jp/entry/20170922/sadlyselectfw
+        // 『応援してる "A" にもデメリットはあるよ』にもつながる話だが、「一番いい」を選ぶことより、それの持つメリットを最大化しデメリットを最小化することが肝要
+        // フレームワークの思想、意識して使っていますか？ https://jflute.hatenadiary.jp/entry/20181014/fwthought
+        // フレームワークの思想ってそもそもなんだろう？
+        // 使いこなしてないAと使いこなしてるA https://jflute.hatenadiary.jp/entry/20140922/twotools
+        // 以前シャイニーさんにAWS勉強会をしてもらった際も出てきたキーワードで、「何を作るか」から使うサービスを選ぶべきという話にも繋がりそう
+        // エンジニアドリブンでサービスを作ってしまうと、「これを使ってみたい」からスタートしてしまいがち
+        // 勉強や趣味ならそれでもいいが、ビジネスを枕詞にするのではあれば慎重になる必要がある
+        // まず何より、目の前の道具を使いこなしてください https://jflute.hatenadiary.jp/entry/20180223/mastercurrent
+        // 一番刺さった
+        // 基本的に自分ではチャーハンを作る練習をしているつもりだが、もっともらしい理由をつけてショートケーキを作っていることはある気がする
+        // まだプロと自認できるレベルではないが、お金を頂いている以上プロなのは紛れもない事実
+        // その上でまだプロだと自称できないのであれば、自称できるようになるまでチャーハンを作り続けるべき
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
