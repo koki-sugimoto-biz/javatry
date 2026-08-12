@@ -50,6 +50,10 @@ public class Step01VariableTest extends PlainTestCase {
         log(sea); // your answer? => mystic8null:mai
         // TODO sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
         // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
+
+        // TODO sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
+        // basicの後に、colorbox, debug, DI, DBFluteも別であり、どれを深く知りたいかを事前に決めておくと進めやすいかもです
+        // （自分はbasicのstep06, 07を深掘りさせていただきました）
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -85,6 +89,13 @@ public class Step01VariableTest extends PlainTestCase {
         // #1on1: プリミティヴ型は変数に値がそのまま入っているイメージ (2026/07/27)
         // 言語によっては、intって書いてもオブジェクトの場合もある。
         // 質問 → intのラッパー型(オブジェクト型)はInteger。
+
+        // TODO sugimoto [教えてください] Goはどういうパラダイムの言語です？ by akinari.tsuji (2026/08/12)
+        // Goではクラスや継承がないと聞きましたがオブジェクト指向なのかなーと気になりました。
+        // Step06の内容かもなので、無視してDoneでも大丈夫です！
+        // （お節介かもですが）せっかく普段と違うJavaという言語なので、業務で使う言語と比較しながら進めると面白いかもです！
+        // ちなみにRubyだと全てがオブジェクトになります。なので "1.to_s"とかかけちゃいます。
+        // 実行環境やクラス定義自身もオブジェクトになります（初めて知った時びっくりしました笑）。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
