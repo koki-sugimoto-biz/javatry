@@ -48,7 +48,7 @@ public class Step01VariableTest extends PlainTestCase {
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8null:mai
-        // TODO Done sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
+        // Done sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
         // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
 
         // ツールの思想の話やフレームワーク選択という枠組みでの話 by sugimoto
@@ -67,12 +67,15 @@ public class Step01VariableTest extends PlainTestCase {
         // 基本的に自分ではチャーハンを作る練習をしているつもりだが、もっともらしい理由をつけてショートケーキを作っていることはある気がする
         // まだプロと自認できるレベルではないが、お金を頂いている以上プロなのは紛れもない事実
         // その上でまだプロだと自称できないのであれば、自称できるようになるまでチャーハンを作り続けるべき
+        // #1on1: "もっともらしい理由をつけてショートケーキを作っていることはある気がする" (2026/08/12)
+        // これは考えさせられる言葉だなと。何がチャーハンで何がショートケーキなのか？現実は曖昧だったりするので...
 
-
-        // TODO Done sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
+        // Done sugimoto 全然話違いますが...Javatryの全容を先にお聞きして進め方考えるのアリかもです by akinari.tsuji (2026/08/12)
         // basicの後に、colorbox, debug, DI, DBFluteも別であり、どれを深く知りたいかを事前に決めておくと進めやすいかもです
         // （自分はbasicのstep06, 07を深掘りさせていただきました）
         // 承知しました！ありがとうございます！
+        // #1on1: 確かに。このあと何を学ぶのか？を把握してからの方が時間の使い方が効率良いかも (2026/08/12)
+        // つじさん、アドバイスありがとう！
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -109,7 +112,7 @@ public class Step01VariableTest extends PlainTestCase {
         // 言語によっては、intって書いてもオブジェクトの場合もある。
         // 質問 → intのラッパー型(オブジェクト型)はInteger。
 
-        // TODO Done sugimoto [教えてください] Goはどういうパラダイムの言語です？ by akinari.tsuji (2026/08/12)
+        // Done sugimoto [教えてください] Goはどういうパラダイムの言語です？ by akinari.tsuji (2026/08/12)
         // Goではクラスや継承がないと聞きましたがオブジェクト指向なのかなーと気になりました。
         // Step06の内容かもなので、無視してDoneでも大丈夫です！
         // （お節介かもですが）せっかく普段と違うJavaという言語なので、業務で使う言語と比較しながら進めると面白いかもです！
@@ -123,6 +126,10 @@ public class Step01VariableTest extends PlainTestCase {
 
         // 実行環境やクラス定義自身もオブジェクトになります
         // -> ?!そうなんですか?! いまいち分かんないので調べてみます....!!!
+
+        // #1on1: シンプルな仕様がポイント (2026/08/12)
+        // "誰が書いても同じようなコードになる" もポイント。業務のプログラミングではありがたい。
+        // フレームワークの思想のブログの話につながる。言語も思想を持ってて、演出のされ方が全然違う。
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -147,8 +154,26 @@ public class Step01VariableTest extends PlainTestCase {
         // o 読み飛ばしとか、確定情報を得られやすくなって、可読性が良くなる by jflute
         //   (責務の話と通じるかも)
         // (デメリット)
+        // o $ 初学者がわからんときあるかも？ (by すぎもとさん)
+        // o $ 使い方を間違えないければ良いもののような？？？ (by すぎもとさん)
+        // o メモリたくさん使う
+        // o 若干手間が掛かる (mutableに比べれば)
+        //
+        // immutableの歴史:
+        // o 昔はimmutable推しが少なかった...なぜ？ CPUとメモリ？
+        // o インスタンスをひたすらnew/newするimmutableなプログラミングは抵抗あった
+        // o 言語の文法が今よりは貧弱なので、immutableも若干手間が掛かる。
+        // o 今や、メモリもたくさん、言語も文法がリッチになって、そこまで気にしなくてもよくなってきた
+        //
+        // immutableのバランス:
+        // o 言語や組織や個人に寄る
+        // o Java: 歴史的なところあって混ざるし、コンセプトもimmutable全推し(まあ推し)、
+        //         なので、8:2くらいでimmutable頑張るけど無理はしない。
+        //         jflute個人が、そんな感じでJava書いてる。
+        //         mutableにするときは、安全性と可読性を別の手段で演出するように工夫する。
+        // o 別の言語: immutable全推しの言語もある。
 
-        // TODO jflute 次回1on1にて、immutableのデメリットから、歴史まで (2026/07/27)
+        // done jflute 次回1on1にて、immutableのデメリットから、歴史まで (2026/07/27)
     }
 
     // ===================================================================================
@@ -218,7 +243,7 @@ public class Step01VariableTest extends PlainTestCase {
         sea.concat(landStr);
     }
 
-    // TODO jflute 次回1on1にて、mutableなクラスの話 (2026/07/27)
+    // done jflute 次回1on1にて、mutableなクラスの話 (2026/07/27)
     // -----------------------------------------------------
     //                                   Mutable Method-call
     //                                   -------------------
@@ -228,6 +253,8 @@ public class Step01VariableTest extends PlainTestCase {
         int land = 415;
         helpMethodArgumentMethodcall(sea, land);
         log(sea); // your answer? => harbor415(StringBuilderは内部にバッファを持っておりそちらに直接書きこれるため)
+        // #1on1: 色紙の例。mutableなクラスを引数にするのは、中で書き換える時にしたい (2026/08/12)
+        // 何も書き換えないのにmutableな引数にするのは避けたい。(or 別の手段で可読性良くする)
     }
 
     private void helpMethodArgumentMethodcall(StringBuilder sea, int land) {
