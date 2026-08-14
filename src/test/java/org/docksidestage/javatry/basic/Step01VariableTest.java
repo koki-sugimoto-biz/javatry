@@ -48,7 +48,7 @@ public class Step01VariableTest extends PlainTestCase {
         String dstore = "mai";
         sea = sea + land + piari + ":" + dstore;
         log(sea); // your answer? => mystic8null:mai
-        // Done sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
+        // TODO Done sugimoto [読み物課題] 応援してる "A" にもデメリットはあるよ by jflute (2026/07/27)
         // https://jflute.hatenadiary.jp/entry/20181008/yourademerit
 
         // ツールの思想の話やフレームワーク選択という枠組みでの話 by sugimoto
