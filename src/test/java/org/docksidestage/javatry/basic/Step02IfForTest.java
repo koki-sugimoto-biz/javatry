@@ -52,7 +52,7 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 7;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -67,7 +67,7 @@ public class Step02IfForTest extends PlainTestCase {
         } else {
             sea = 9;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 7
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -92,6 +92,7 @@ public class Step02IfForTest extends PlainTestCase {
             if (sea < 1810) {
                 sea = 8;
             }
+            // sea = 8 land = true
         } else if (sea == 8) {
             sea++;
             land = false;
@@ -107,7 +108,7 @@ public class Step02IfForTest extends PlainTestCase {
         if (land) {
             sea = 10;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 10
     }
 
     // ===================================================================================
@@ -123,17 +124,17 @@ public class Step02IfForTest extends PlainTestCase {
                 sea = stage;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
     public void test_for_foreach_basic() {
         List<String> stageList = prepareStageList();
         String sea = null;
-        for (String stage : stageList) {
+        for (String stage : stageList) { // 拡張for文っていうらしい。listの要素を順々にstageに入れている by sugimoto
             sea = stage;
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => magiclamp
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -145,11 +146,11 @@ public class Step02IfForTest extends PlainTestCase {
                 continue;
             }
             sea = stage;
-            if (stage.contains("ga")) {
+            if (stage.contains("ga")) { // stageに"ga"が含まれているか
                 break;
             }
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => hangar
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -165,7 +166,7 @@ public class Step02IfForTest extends PlainTestCase {
             }
         });
         String sea = sb.toString();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => dockside
     }
 
     // ===================================================================================
@@ -177,6 +178,17 @@ public class Step02IfForTest extends PlainTestCase {
      */
     public void test_iffor_making() {
         // write if-for here
+        List<String> stageList = prepareStageList();
+        List<String> filteredStageList = new ArrayList<>();
+        for (String stage : stageList) {
+            if (stage.contains("a")) {
+                filteredStageList.add(stage);
+            }
+        }
+        for (int i = 0; i < filteredStageList.size(); i++) {
+            String sea = filteredStageList.get(i);
+            log(sea);
+        }
     }
 
     // ===================================================================================
@@ -187,18 +199,34 @@ public class Step02IfForTest extends PlainTestCase {
      * (foreach文をforEach()メソッドへの置き換えてみましょう (修正前と修正後で実行結果が同じになるように))
      */
     public void test_iffor_refactor_foreach_to_forEach() {
+//        List<String> stageList = prepareStageList();
+//        String sea = null;
+//        for (String stage : stageList) {
+//            if (stage.startsWith("br")) {
+//                continue;
+//            }
+//            sea = stage;
+//            if (stage.contains("ga")) {
+//                break;
+//            }
+//        }
+//        log(sea); // should be same as before-fix
         List<String> stageList = prepareStageList();
-        String sea = null;
-        for (String stage : stageList) {
+        String[] sea = { null }; // ラムダ式で使うローカル変数は、finalじゃないといけないらしい？配列の要素は変えられるらしい
+        Boolean[] flag = { false }; // 同上
+        stageList.forEach(stage -> {
+            if (flag[0]) {
+                return;
+            }
             if (stage.startsWith("br")) {
-                continue;
+                return;
             }
-            sea = stage;
+            sea[0] = stage;
             if (stage.contains("ga")) {
-                break;
+                flag[0] = true;
             }
-        }
-        log(sea); // should be same as before-fix
+        });
+        log(sea);
     }
 
     /**
@@ -207,12 +235,15 @@ public class Step02IfForTest extends PlainTestCase {
      * <pre>
      * _/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
      * your question here (ここにあなたの質問を):
-     * 
+     * prepareStageListの要素を全てlogに出力しましょう
      * _/_/_/_/_/_/_/_/_/_/
      * </pre>
      */
     public void test_iffor_yourExercise() {
-        // write your code here
+        List<String> stageList = prepareStageList();
+        for (String stage : stageList) {
+            log(stage);
+        }
     }
 
     // ===================================================================================
