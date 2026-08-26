@@ -85,7 +85,7 @@ public class Step02IfForTest extends PlainTestCase {
                 sea = sea++ * 2;
             }
             if (!land) {
-                land = true;
+                land = true; // ここを通ればseaは10と言い切れる
             } else if (sea <= 903) {
                 sea++;
             }
@@ -109,6 +109,35 @@ public class Step02IfForTest extends PlainTestCase {
             sea = 10;
         }
         log(sea); // your answer? => 10
+
+        // #1on1: $上から読んでごちゃごちゃやってるなと思って最後結局10じゃんかよ (2026/08/26)
+        // 上から読むのは、javatryとしてはトレーニングになるので、それはそれでGoodです。
+        // 
+        // 漠然読みの紹介:
+        // o 漠然読みで構造だけ把握する (全体像を見る)
+        //  → 5つパート、でっかいif文
+        //  → 当たりを見つけやすくなってる (逆さ読みもやりつつではあるけど)
+        // o 当たり(ギャンブルポイント)を見つけて、フォーカス読み
+        //  → landで逆さ読みをしていってtrueになるかどうか？
+        //
+        // ただ、ギャンブルに負けることはある。でも、損はない。
+        // 構造把握して、ある程度踏み込んだことで、０から読むよりは速く読めるようになってる。
+        // あと安定して読めるようになっている。という考え。
+        //
+        // 一方で、ギャンブルに負けても、次の当たりを見つけてフォーカス読み。
+        // 3,4回繰り返しても、コードの規模によっては網羅読みよりも速い可能性あり。
+        // 
+        // ぼくらのお仕事は、全てを把握することではなく、その目的を達成すること。
+        //
+        // 読まなくて良いところを読まないように努力する。
+        //
+        // 仮説思考的なコードリーディング!?
+        // 
+        // TODO sugimoto [読み物課題] My Favorite Book: 仮説思考 by jflute (2026/08/26)
+        // https://jflute.hatenadiary.jp/entry/20150111/kasetsu
+        //
+        // $いきなり詳細に突っ込んで論理の迷子になる経験もあった
+        // 意識の実践を繰り返していけば、そのうち無意識にできるようになる
     }
 
     // ===================================================================================
@@ -135,6 +164,12 @@ public class Step02IfForTest extends PlainTestCase {
             sea = stage;
         }
         log(sea); // your answer? => magiclamp
+
+        // #1on1: Java文法のfor文二つ (2026/08/26)
+        // いんとあいのfor文: 
+        // 拡張for文: // 普通のfor文!?
+        //
+        // よもやま: 文法用語が現場で浸透しているとは限らない
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -199,20 +234,22 @@ public class Step02IfForTest extends PlainTestCase {
      * (foreach文をforEach()メソッドへの置き換えてみましょう (修正前と修正後で実行結果が同じになるように))
      */
     public void test_iffor_refactor_foreach_to_forEach() {
-//        List<String> stageList = prepareStageList();
-//        String sea = null;
-//        for (String stage : stageList) {
-//            if (stage.startsWith("br")) {
-//                continue;
-//            }
-//            sea = stage;
-//            if (stage.contains("ga")) {
-//                break;
-//            }
-//        }
-//        log(sea); // should be same as before-fix
+        //        List<String> stageList = prepareStageList();
+        //        String sea = null;
+        //        for (String stage : stageList) {
+        //            if (stage.startsWith("br")) {
+        //                continue;
+        //            }
+        //            sea = stage;
+        //            if (stage.contains("ga")) {
+        //                break;
+        //            }
+        //        }
+        //        log(sea); // should be same as before-fix
         List<String> stageList = prepareStageList();
         String[] sea = { null }; // ラムダ式で使うローカル変数は、finalじゃないといけないらしい？配列の要素は変えられるらしい
+        // TODO sugimoto flagじゃなくてもうちょいわかりやすい変数名を (習慣として) by jflute (2026/08/26)
+        // TODO sugimoto 修行++: このflag変数使わなくても実現できます(パズル問題) by jflute (2026/08/26)
         Boolean[] flag = { false }; // 同上
         stageList.forEach(stage -> {
             if (flag[0]) {
@@ -227,6 +264,37 @@ public class Step02IfForTest extends PlainTestCase {
             }
         });
         log(sea);
+
+        // #1on1: なぜ？Lambdaの中で外側のローカル変数の書き換えができない文法なのか？ (2026/08/26)
+        // $メソッド化したことがあやしい
+        // ソースコードリーディングしてみた。
+        // forEach()メソッドは、ただのfor文の代理人。
+        // 引数のConsumerとかlambda式はstep8で詳しくやります。
+        // まあ要は、別クラスの別メソッドを引数に入れている。
+        // {} は別クラス別メソッド。
+        //
+        // そう考えると、別クラス別メソッドが、別メソッドの変数の代入をできたら大変だよね!?
+        // ローカル変数なのに、別メソッドが書き換えとかできたらカオスになる。
+        // だから、continue;break;もできない。
+        //
+        // ということで、できないことだらけのforEach()メソッド。
+        // 代理人経由しちゃってるから、本来のfor文の機能が使えない状態になっている。
+        //
+        // じゃあなぜforEach()メソッドは存在するのか？
+        //
+        // o int iのfor文: Java当初から (1995年)
+        // o 拡張for文: 10年目ぐらいから (2005年くらい)
+        // o forEach()メソッド: 20年目くらいから (2015年くらい)
+        //
+        // ローカル変数書き換えやcontinue;break;が要らない場面だったら...
+        // 制限が掛かってる道具を使った方が、安全で可読性も良い。
+        // なので、ストレートなループしかしない場面なら、forEach()が適していると言える。
+        // 制限があることで得られるものがある。
+        // 実際、webサービスだったら、ストレートなループがほとんどの印象。
+        //
+        // 一方で、適材適所すぎるのもつらいのがジレンマ。
+        // 使い分けを判断するのも脳みそコスト。
+        // なので制限デザインが難しい。いかにうまく制限を取り入れるか？
     }
 
     /**
