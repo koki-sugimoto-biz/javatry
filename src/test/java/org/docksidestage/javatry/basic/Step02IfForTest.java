@@ -133,8 +133,17 @@ public class Step02IfForTest extends PlainTestCase {
         //
         // 仮説思考的なコードリーディング!?
         // 
-        // TODO sugimoto [読み物課題] My Favorite Book: 仮説思考 by jflute (2026/08/26)
+        // TODO done sugimoto [読み物課題] My Favorite Book: 仮説思考 by jflute (2026/08/26)
         // https://jflute.hatenadiary.jp/entry/20150111/kasetsu
+        // 『仮説を事実だと思い込む』はめっちゃあるあるだなと思いました。
+        // 自分の中で仮説のつもりでも、『A + B = C』の、AとBを足し算するっていう部分すら仮説のはずなのに、事実としてごっちゃにしちゃうとかは昔あった
+        //  『= C』の部分も仮説だけど、左辺の式も仮説だよと認識しておかないといけない
+        // スモールライトの話はめちゃくちゃ大事だけど、しっかり抽象化しないとスモールライト当てるのも難しいなと思いました。
+        //
+        // 関連：論理的に行き詰まったとき、からが始まり
+        // https://jflute.hatenadiary.jp/entry/20140613/zerostart
+        // 人生とかインターンとかにおいてはこの状態になったことはあったはずだけど、社会人になってからはまだなってない
+        // インプットが多いのもそうだけど、脳に汗をちゃんとかけてないのかな？
         //
         // $いきなり詳細に突っ込んで論理の迷子になる経験もあった
         // 意識の実践を繰り返していけば、そのうち無意識にできるようになる
@@ -248,22 +257,32 @@ public class Step02IfForTest extends PlainTestCase {
         //        log(sea); // should be same as before-fix
         List<String> stageList = prepareStageList();
         String[] sea = { null }; // ラムダ式で使うローカル変数は、finalじゃないといけないらしい？配列の要素は変えられるらしい
-        // TODO sugimoto flagじゃなくてもうちょいわかりやすい変数名を (習慣として) by jflute (2026/08/26)
-        // TODO sugimoto 修行++: このflag変数使わなくても実現できます(パズル問題) by jflute (2026/08/26)
-        Boolean[] flag = { false }; // 同上
+        // TODO done sugimoto flagじゃなくてもうちょいわかりやすい変数名を (習慣として) by jflute (2026/08/26)
+        // TODO done sugimoto 修行++: このflag変数使わなくても実現できます(パズル問題) by jflute (2026/08/26)
+//        Boolean[] determined = { false }; // 同上
+//        stageList.forEach(stage -> {
+//            if (determined[0]) {
+//                return;
+//            }
+//            if (stage.startsWith("br")) {
+//                return;
+//            }
+//            sea[0] = stage;
+//            if (stage.contains("ga")) {
+//                determined[0] = true;
+//            }
+//        });
+//        log(sea);
         stageList.forEach(stage -> {
-            if (flag[0]) {
+            if (sea[0] != null && sea[0].contains("ga")) {
                 return;
             }
             if (stage.startsWith("br")) {
                 return;
             }
             sea[0] = stage;
-            if (stage.contains("ga")) {
-                flag[0] = true;
-            }
         });
-        log(sea);
+        log(sea[0]);
 
         // #1on1: なぜ？Lambdaの中で外側のローカル変数の書き換えができない文法なのか？ (2026/08/26)
         // $メソッド化したことがあやしい
