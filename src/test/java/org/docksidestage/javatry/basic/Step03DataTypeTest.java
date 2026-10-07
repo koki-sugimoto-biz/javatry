@@ -40,6 +40,20 @@ public class Step03DataTypeTest extends PlainTestCase {
     public void test_datatype_basicType() {
         String sea = "mystic";
         Integer land = 416;
+
+        // #1on1: Date/DateTimeという言葉 (2026/10/07)
+        // 日付(Date): 年月日
+        // 日時(DateTime): 年月日+時分秒
+        //
+        // 歴史的にこうじゃないときがあるのでちょい注意。
+        // e.g. java.util.Date, OracleDB DATE型が時分秒
+        // $エポックDayの32ビット問題の話
+        // 
+        // jfluteの個人的な分析、日付系クラス、日付(系)クラスというように、
+        // DateとDateTimeを含んだ抽象概念として、Dateを使うことがあったりしないかな!?
+        //
+        // 言葉にこだわること自体がトレーニング。
+        //
         LocalDate piari = LocalDate.of(2001, 9, 4);
         LocalDateTime bonvo = LocalDateTime.of(2001, 9, 4, 12, 34, 56);
         Boolean dstore = true;
@@ -83,6 +97,8 @@ public class Step03DataTypeTest extends PlainTestCase {
             sea = 0;
         }
         log(sea); // your answer? => 2
+
+        // #1on1: キャストは情報ロスが発生する可能性があるのでできるだけ避けたい (2026/10/07)
     }
 
     // ===================================================================================
@@ -95,6 +111,8 @@ public class Step03DataTypeTest extends PlainTestCase {
         log(sea); // your answer? => hangar
     }
 
+    // #1on1: Javaでimmutableを素直に作るとなったらこうなる (2026/10/07)
+    // finalは必須ではないけど、付けてた方がメンテする人が安全、読む人が読みやすい。
     private static class St3ImmutableStage {
 
         private final String stageName;
@@ -107,4 +125,28 @@ public class Step03DataTypeTest extends PlainTestCase {
             return stageName;
         }
     }
+
+    // #1on1: $要件定義の一部を上司に巻き取ってもらったけど、悔しい (2026/10/07)
+    // $そこから学んで、今度こそは。
+    //
+    // できなかった理由:
+    // $全体がちゃんとわかってなかった、現状とゴールはあったが、中のイメージが足らない
+    // $業務の全体像、システムの全体像、両方
+    // $AIやチームに頼って、現状報告をしてフィードバックをもらいながら全体像。
+    // 全体像がすぐには把握できないことを前提に進めていく。
+    //
+    // 要件定義ってどこからどこまで？
+    // 要求定義(これやりたい)と要件定義(つまりこういうことですね)の違い。
+    //
+    // 要件定義
+    // → 外部設計(インターフェース設計)
+    // → 内部設計(機能設計)
+    // → 詳細設計(実装設計)
+    // --- $このへんまで要件定義の感覚だった
+    // → 実装
+    // (→ テスト設計)
+    // → テスト
+    //
+    // 今まで要件定義と思っていた領域の作業を整理整頓するきっかけになればと。
+    // SIer経験とwebサービス出身のジレンマ。
 }

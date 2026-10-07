@@ -280,7 +280,7 @@ public class Step02IfForTest extends PlainTestCase {
         List<String> stageList = prepareStageList();
         String[] sea = { null }; // ラムダ式で使うローカル変数は、finalじゃないといけないらしい？配列の要素は変えられるらしい
         // done sugimoto flagじゃなくてもうちょいわかりやすい変数名を (習慣として) by jflute (2026/08/26)
-        // TODO done sugimoto determinedだと判断したっていう意味しかないかなと by jflute (2026/09/09)
+        // done sugimoto determinedだと判断したっていう意味しかないかなと by jflute (2026/09/09)
         // 何を determined したのか？の方が、変数名に欲しいところかな。
         // 変数宣言のところだけで、「ああ、こういうときにtrueになるものなんだ」ってわかるように。
         // $gaを見つけたらなので、foundGa とか!?
