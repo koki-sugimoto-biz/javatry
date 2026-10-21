@@ -35,7 +35,7 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_call_basic() {
         String sea = supplySomething();
-        log(sea); // your answer? =>
+        log(sea); // your answer? => over
     }
 
     /** Same as the previous method question. (前のメソッドの質問と同じ) */
@@ -43,7 +43,7 @@ public class Step04MethodTest extends PlainTestCase {
         String sea = functionSomething("mystic");
         consumeSomething(supplySomething());
         runnableSomething();
-        log(sea); // your answer? => 
+        log(sea); // your answer? => mysmys
     }
 
     private String functionSomething(String name) {
@@ -76,7 +76,7 @@ public class Step04MethodTest extends PlainTestCase {
         if (!land) {
             sea = sea + mutable.getStageName().length();
         }
-        log(sea); // your answer? => 
+        log(sea); // your answer? => 910
     }
 
     private int helloMutable(int sea, Boolean land, St4MutableStage piari) {
@@ -115,7 +115,10 @@ public class Step04MethodTest extends PlainTestCase {
         }
         ++sea;
         sea = inParkCount;
-        log(sea); // your answer? => 
+        log(sea); // your answer? => ?
+        // 実行したら100だった。seaの初期値が0だったら成立すると思う
+        // https://qiita.com/kumaGoro_95/items/3420cbb36f4e9edfcee1
+        // 今回はインスタンス変数っぽい
     }
 
     private void offAnnualPassport(boolean hasAnnualPassport) {
@@ -132,6 +135,7 @@ public class Step04MethodTest extends PlainTestCase {
     //                                                                           Challenge
     //                                                                           =========
     // write instance variables here
+    private boolean availableLogging = true;
     /**
      * Make private methods as followings, and comment out caller program in test method:
      * <pre>
@@ -152,12 +156,37 @@ public class Step04MethodTest extends PlainTestCase {
      */
     public void test_method_making() {
         // use after making these methods
-        //String replaced = replaceCwithB(replaceAwithB("ABC"));
-        //String sea = quote(replaced, "'");
-        //if (isAvailableLogging()) {
-        //    showSea(sea);
-        //}
+        String replaced = replaceCwithB(replaceAwithB("ABC"));
+        String sea = quote(replaced, "'");
+        if (isAvailableLogging()) {
+            showSea(sea);
+        }
     }
 
     // write methods here
+    private String replaceAwithB(String name) {
+        return name.replace("A", "B");
+    }
+
+    private String replaceCwithB(String name) {
+        return name.replace("C", "B");
+    }
+
+    private String quote(String text, String quoteMark) {
+        return quoteMark + text + quoteMark;
+    }
+
+    private boolean isAvailableLogging() {
+        return availableLogging;
+    }
+
+    private void showSea(String sea) {
+        log(sea);
+    }
+
+//    private String functionSomething(String name) {
+//        String replaced = name.replace("tic", "mys");
+//        log("in function: {}", replaced);
+//        return replaced;
+//    }
 }
