@@ -183,10 +183,4 @@ public class Step04MethodTest extends PlainTestCase {
     private void showSea(String sea) {
         log(sea);
     }
-
-//    private String functionSomething(String name) {
-//        String replaced = name.replace("tic", "mys");
-//        log("in function: {}", replaced);
-//        return replaced;
-//    }
 }
