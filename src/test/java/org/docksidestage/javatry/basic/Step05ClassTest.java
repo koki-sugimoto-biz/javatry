@@ -16,9 +16,9 @@
 package org.docksidestage.javatry.basic;
 
 import org.docksidestage.bizfw.basic.buyticket.Ticket;
-import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyException;
+import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -104,6 +104,17 @@ public class Step05ClassTest extends PlainTestCase {
         log(sea); // should be same as one-day price, visual check here
     }
 
+    // #1on1: 特徴的な二つのバグ (2026/11/10)
+    // o お金不足でもチケットが減る問題: 複数行の流れのバグ
+    //  i 単行だけ見てもわからなくて、業務の流れを理解しないと見つからない
+    //  i 意識して流れのバグを見つけられると良い
+    //  i 実際の業務だと、もっと構造化されていて、流れがわかりにくいときもある
+    //
+    // o 受け取ったお金の分だけ売上が増えていく問題: 単行のロジックのバグ
+    //  i こっちはまだ比較的見つけやすい
+    //  i 一方で変数名がアバウトだと単行では見つけにくくなったり
+    //    (変数名って大事なんだなぁ)
+
     /**
      * Make method for buying two-day passport (price is 13200). (which can return change as method return value)
      * (TwoDayPassport (金額は13200) も買うメソッドを作りましょう (戻り値でお釣りをちゃんと返すように))
@@ -168,6 +179,7 @@ public class Step05ClassTest extends PlainTestCase {
         assertFalse(twoDayPassport.isAlreadyIn());
     }
 
+    // TODO jflute 次回ここから (2026/11/10)
     /**
      * Now you can use only one in spite of two-day passport, so fix Ticket to be able to handle plural days. <br>
      * (TwoDayPassportなのに一回しか利用できません。複数日数に対応できるようにTicketを修正しましょう)

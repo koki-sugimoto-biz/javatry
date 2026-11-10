@@ -67,6 +67,9 @@ public class TicketBooth {
         return new TicketBuyResult(ticket, change);
     }
 
+    // TODO sugimoto publicのbuyとprivateのbuyを区別する小テクニック by jflute (2026/11/10)
+    // 些細なことだけど、メソッド一覧で紛れて視認しにくくなる、かつ、会話上buyメソッドが曖昧になる。
+    // e.g. doBuyPassport(), internalBuyPassport()
     private int buyPassport(Integer handedMoney, int price) {
         if (quantity <= 0) {
             throw new TicketSoldOutException("Sold out");
