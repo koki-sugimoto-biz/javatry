@@ -15,10 +15,13 @@
  */
 package org.docksidestage.javatry.basic;
 
+import java.time.LocalTime;
+
 import org.docksidestage.bizfw.basic.buyticket.Ticket;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth;
 import org.docksidestage.bizfw.basic.buyticket.TicketBooth.TicketShortMoneyException;
 import org.docksidestage.bizfw.basic.buyticket.TicketBuyResult;
+import org.docksidestage.bizfw.basic.buyticket.TicketType;
 import org.docksidestage.unit.PlainTestCase;
 
 /**
@@ -185,7 +188,20 @@ public class Step05ClassTest extends PlainTestCase {
      * (TwoDayPassportなのに一回しか利用できません。複数日数に対応できるようにTicketを修正しましょう)
      */
     public void test_class_moreFix_usePluralDays() {
-        // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        Ticket twoDayPassport = booth.buyTwoDayPassport(14000).getTicket();
+        assertEquals(2, twoDayPassport.getRemainingDays());
+        assertFalse(twoDayPassport.isAlreadyIn());
+        twoDayPassport.doInPark();
+        log(twoDayPassport.getRemainingDays()); // your answer? => 1
+        assertEquals(1, twoDayPassport.getRemainingDays());
+        assertTrue(twoDayPassport.isAlreadyIn());
+        assertFalse(twoDayPassport.isUsedUp());
+        twoDayPassport.doInPark();
+        log(twoDayPassport.getRemainingDays()); // your answer? => 0
+        assertTrue(twoDayPassport.isUsedUp());
+        assertException(IllegalStateException.class, () -> twoDayPassport.doInPark());
+        assertEquals(0, twoDayPassport.getRemainingDays());
     }
 
     /**
@@ -193,23 +209,26 @@ public class Step05ClassTest extends PlainTestCase {
      * (買ったチケットの種別がTwoDayPassportなのかどうかをif文で正確に判定してみましょう。(必要ならTicketクラスたちを修正))
      */
     public void test_class_moreFix_whetherTicketType() {
-        // uncomment when you implement this exercise
-        //TicketBooth booth = new TicketBooth();
-        //Ticket oneDayPassport = booth.buyOneDayPassport(10000);
-        //showTicketIfNeeds(oneDayPassport);
-        //TicketBuyResult buyResult = booth.buyTwoDayPassport(10000);
-        //Ticket twoDayPassport = buyResult.getTicket();
-        //showTicketIfNeeds(twoDayPassport);
+        TicketBooth booth = new TicketBooth();
+        Ticket oneDayPassport = booth.buyOneDayPassport(10000);
+        showTicketIfNeeds(oneDayPassport); // your answer? => other
+        assertEquals(TicketType.ONE_DAY, oneDayPassport.getTicketType());
+        Ticket twoDayPassport = booth.buyTwoDayPassport(14000).getTicket();
+        showTicketIfNeeds(twoDayPassport); // your answer? => two-day passport
+        assertEquals(TicketType.TWO_DAY, twoDayPassport.getTicketType());
+        Ticket nightOnlyTwoDayPassport = booth.buyNightOnlyTwoDayPassport(10000).getTicket();
+        showTicketIfNeeds(nightOnlyTwoDayPassport); // your answer? => other
+        assertEquals(TicketType.NIGHT_ONLY_TWO_DAY, nightOnlyTwoDayPassport.getTicketType());
+        assertEquals(oneDayPassport.getDisplayPrice(), nightOnlyTwoDayPassport.getDisplayPrice());
     }
 
-    // uncomment when you implement this exercise
-    //private void showTicketIfNeeds(Ticket ticket) {
-    //    if (xxxxxxxxxxxxxxxxxx) { // write determination for two-day passport
-    //        log("two-day passport");
-    //    } else {
-    //        log("other");
-    //    }
-    //}
+    private void showTicketIfNeeds(Ticket ticket) {
+        if (ticket.getTicketType() == TicketType.TWO_DAY) {
+            log("two-day passport");
+        } else {
+            log("other");
+        }
+    }
 
     // ===================================================================================
     //                                                                           Good Luck
@@ -219,7 +238,22 @@ public class Step05ClassTest extends PlainTestCase {
      * (FourDayPassport (金額は22400) のチケットも買えるようにしましょう)
      */
     public void test_class_moreFix_wonder_four() {
-        // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyResult = booth.buyFourDayPassport(30000);
+        Ticket fourDayPassport = buyResult.getTicket();
+        log(fourDayPassport.getDisplayPrice(), buyResult.getChange()); // your answer? => 22400, 7600
+        assertEquals(TicketType.FOUR_DAY, fourDayPassport.getTicketType());
+        assertEquals(22400, fourDayPassport.getDisplayPrice());
+        assertEquals(7600, buyResult.getChange());
+        assertEquals(Integer.valueOf(22400), booth.getSalesProceeds());
+        assertEquals(9, booth.getQuantity());
+        assertEquals(4, fourDayPassport.getRemainingDays());
+        for (int day = 1; day <= 4; day++) {
+            fourDayPassport.doInPark();
+            assertEquals(4 - day, fourDayPassport.getRemainingDays());
+        }
+        assertException(IllegalStateException.class, () -> fourDayPassport.doInPark());
+        assertEquals(0, fourDayPassport.getRemainingDays());
     }
 
     /**
@@ -227,7 +261,27 @@ public class Step05ClassTest extends PlainTestCase {
      * (NightOnlyTwoDayPassport (金額は7400) のチケットも買えるようにしましょう。夜しか使えないようにしましょう)
      */
     public void test_class_moreFix_wonder_night() {
-        // your confirmation code here
+        TicketBooth booth = new TicketBooth();
+        TicketBuyResult buyResult = booth.buyNightOnlyTwoDayPassport(10000);
+        Ticket nightOnlyTwoDayPassport = buyResult.getTicket();
+        log(nightOnlyTwoDayPassport.getDisplayPrice(), buyResult.getChange()); // your answer? => 7400, 2600
+        assertEquals(7400, nightOnlyTwoDayPassport.getDisplayPrice());
+        assertEquals(2600, buyResult.getChange());
+        assertEquals(Integer.valueOf(7400), booth.getSalesProceeds());
+        assertEquals(9, booth.getQuantity());
+        assertException(IllegalStateException.class, () -> nightOnlyTwoDayPassport.doInPark(LocalTime.of(18, 0).minusNanos(1)));
+        assertEquals(2, nightOnlyTwoDayPassport.getRemainingDays());
+        assertFalse(nightOnlyTwoDayPassport.isAlreadyIn());
+        nightOnlyTwoDayPassport.doInPark(LocalTime.of(18, 0));
+        log(nightOnlyTwoDayPassport.getRemainingDays()); // your answer? => 1
+        assertEquals(1, nightOnlyTwoDayPassport.getRemainingDays());
+        assertException(IllegalStateException.class, () -> nightOnlyTwoDayPassport.doInPark(LocalTime.MIDNIGHT));
+        assertEquals(1, nightOnlyTwoDayPassport.getRemainingDays());
+        nightOnlyTwoDayPassport.doInPark(LocalTime.MAX);
+        log(nightOnlyTwoDayPassport.getRemainingDays()); // your answer? => 0
+        assertTrue(nightOnlyTwoDayPassport.isUsedUp());
+        assertException(IllegalStateException.class, () -> nightOnlyTwoDayPassport.doInPark(LocalTime.of(18, 0)));
+        assertEquals(0, nightOnlyTwoDayPassport.getRemainingDays());
     }
 
     // ===================================================================================

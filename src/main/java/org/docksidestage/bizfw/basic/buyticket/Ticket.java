@@ -15,6 +15,9 @@
  */
 package org.docksidestage.bizfw.basic.buyticket;
 
+import java.time.LocalTime;
+import java.util.Objects;
+
 /**
  * @author jflute
  */
@@ -23,29 +26,58 @@ public class Ticket {
     // ===================================================================================
     //                                                                           Attribute
     //                                                                           =========
+    private final TicketType ticketType;
+    private int remainingDays;
     private final int displayPrice; // written on ticket, park guest can watch this
-    private boolean alreadyIn; // true means this ticket is unavailable
+    private boolean alreadyIn;
 
     // ===================================================================================
     //                                                                         Constructor
     //                                                                         ===========
     public Ticket(int displayPrice) {
+        this(TicketType.ONE_DAY, displayPrice, 1);
+    }
+
+    public Ticket(TicketType ticketType, int displayPrice, int usableDays) {
+        this.ticketType = Objects.requireNonNull(ticketType, "ticketType");
         this.displayPrice = displayPrice;
+        this.remainingDays = usableDays;
     }
 
     // ===================================================================================
     //                                                                             In Park
     //                                                                             =======
     public void doInPark() {
-        if (alreadyIn) {
-            throw new IllegalStateException("Already in park by this ticket: displayedPrice=" + displayPrice);
+        doInPark(LocalTime.now());
+    }
+
+    public void doInPark(LocalTime entryTime) {
+        Objects.requireNonNull(entryTime, "entryTime");
+        if (isUsedUp()) {
+            throw new IllegalStateException("Ticket is used up: displayedPrice=" + displayPrice);
         }
+        if (ticketType == TicketType.NIGHT_ONLY_TWO_DAY && entryTime.isBefore(LocalTime.of(18, 0))) {
+            throw new IllegalStateException("Outside admission hours: time=" + entryTime);
+        }
+        --remainingDays;
         alreadyIn = true;
     }
 
     // ===================================================================================
     //                                                                            Accessor
     //                                                                            ========
+    public TicketType getTicketType() {
+        return ticketType;
+    }
+
+    public int getRemainingDays() {
+        return remainingDays;
+    }
+
+    public boolean isUsedUp() {
+        return remainingDays == 0;
+    }
+
     public int getDisplayPrice() {
         return displayPrice;
     }
