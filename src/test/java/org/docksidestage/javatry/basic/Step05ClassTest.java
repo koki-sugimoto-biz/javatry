@@ -182,7 +182,7 @@ public class Step05ClassTest extends PlainTestCase {
         assertFalse(twoDayPassport.isAlreadyIn());
     }
 
-    // TODO jflute 次回ここから (2026/11/10)
+    // done jflute 次回ここから (2026/11/10)
     /**
      * Now you can use only one in spite of two-day passport, so fix Ticket to be able to handle plural days. <br>
      * (TwoDayPassportなのに一回しか利用できません。複数日数に対応できるようにTicketを修正しましょう)
